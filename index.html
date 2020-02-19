@@ -32,7 +32,7 @@ h1{text-align: center;}
 	</div>
 
 	<script type="text/javascript">
-const speech = [
+let speech = [
 "政府從來唔會違反人權法 我地經協最重視就係人權",
 "唔好搞事 經協最大方 本來想出六席 宜家讓一席俾自民黨 史上最大方係經協",
 "經協最多忠臣 我係代表！",
@@ -63,8 +63,17 @@ const speech = [
 "我覺得死得舒服 死得體面 死得有尊嚴 是最好 不一定是安樂死",
 "你最好撒回你的言辭，否則會保留法律追究權利"];
 
+let used_speech=[];
+
 function next_speech(){
-	speech_box.textContent = speech[Math.floor(Math.random() * speech.length)];
+	let speech_num = Math.floor(Math.random() * speech.length);
+	let this_speech = speech.splice(speech_num, 1)[0];
+	speech_box.textContent = this_speech;
+	used_speech.push(this_speech);
+
+	if(speech.length==0){speech=used_speech;used_speech=[];}
+
+
 	let bg_num = Math.floor(Math.random() * 4) +1;
 	bg.style.backgroundImage = "url(bg"+bg_num+".jpg)";
 	if(bg_num%2==0){
